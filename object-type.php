@@ -41,4 +41,4 @@ echo "<br>";
 echo "Game :" . $produk2->getLable();
 echo "<br>";
 $infoProduk1 = new CetakInfoProduk();
-echo $infoProduk1->cetak($produk1);
+echo $infoProduk1->cetak($produk2);
