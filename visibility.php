@@ -6,9 +6,11 @@ class Produk
     //prperty
     public $judul,
         $penulis,
-        $penerbit,
-        $harga,
-        $waktuMain;
+        $penerbit;
+
+    protected $diskon = 0;
+
+    private $harga;
 
     //constructor
     public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0)
@@ -31,6 +33,12 @@ class Produk
         $string = "{$this->judul} | {$this->getLable()} | Rp. {$this->harga} ";
         return $string;
     }
+
+    //method gettHarga()
+    public function getHarga()
+    {
+        return $this->harga - ($this->harga * $this->diskon / 100);
+    }
 }
 
 
@@ -46,7 +54,7 @@ class Komik extends Produk
 
     public function getInfoProduk()
     {
-        $string = "Komik : " . parent::getInfoProduk() . " | {$this->jmlHalaman} Halaman.";
+        $string = "Komik : " . parent::getInfoProduk() . " | {$this->jmlHalaman} ~Halaman.";
         return $string;
     }
 }
@@ -62,8 +70,12 @@ class Game extends Produk
     }
     public function getInfoProduk()
     {
-        $string = "Game : " . parent::getInfoProduk() . " | {$this->waktuMain} jam.";
+        $string = "Game : " . parent::getInfoProduk() . " | {$this->waktuMain} ~jam.";
         return $string;
+    }
+    public function setDiskon($diskon)
+    {
+        $this->diskon = $diskon;
     }
 }
 
@@ -81,3 +93,6 @@ $produk2 = new Game("resident evil 4", "sony", "sony studio", 60000, 50);
 echo $produk1->getInfoProduk();
 echo "<br>";
 echo $produk2->getInfoProduk();
+echo "<hr>";
+$produk2->setDiskon(50);
+echo $produk2->getHarga();
