@@ -8,17 +8,15 @@ class Produk
         $penulis,
         $penerbit,
         $harga,
-        $jmlHalaman,
         $waktuMain;
 
     //constructor
-    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0)
+    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $waktuMain = 0)
     {
         $this->judul = $judul;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
-        $this->jmlHalaman = $jmlHalaman;
         $this->waktuMain = $waktuMain;
     }
     //method
@@ -39,6 +37,14 @@ class Produk
 
 class Komik extends Produk
 {
+    public $jmlHalaman;
+
+    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0)
+    {
+        parent::__construct($judul, $penulis, $penerbit, $harga);
+        $this->jmlHalaman = $jmlHalaman;
+    }
+
     public function getInfoProduk()
     {
         $string = "Komik : " . parent::getInfoProduk() . " | {$this->jmlHalaman} Halaman.";
@@ -48,6 +54,13 @@ class Komik extends Produk
 
 class Game extends Produk
 {
+    public $waktuMain;
+
+    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $waktuMain = 0)
+    {
+        parent::__construct($judul, $penulis, $penerbit, $harga);
+        $this->waktuMain = $waktuMain;
+    }
     public function getInfoProduk()
     {
         $string = "Game : " . parent::getInfoProduk() . " | {$this->waktuMain} jam.";
@@ -64,8 +77,8 @@ class CetakInfoProduk
     }
 }
 
-$produk1 = new Komik("naruto", "ziad alfian", "zyx studio", 50000, 100, 0);
-$produk2 = new Game("resident evil 4", "sony", "sony studio", 60000, 0, 50);
+$produk1 = new Komik("naruto", "ziad alfian", "zyx studio", 50000, 100);
+$produk2 = new Game("resident evil 4", "sony", "sony studio", 60000, 50);
 echo $produk1->getInfoProduk();
 echo "<br>";
 echo $produk2->getInfoProduk();
